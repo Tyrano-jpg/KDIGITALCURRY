@@ -1,9 +1,7 @@
 import { useEffect, useRef } from "react";
-import { motion } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Box, Typography, List, ListItem } from "@mui/material";
-import "animate.css"; // Import Animate.css
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -18,36 +16,52 @@ const Client = () => {
     // Cleanup previous instances before re-creating
     ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
 
-    // Fade-out effect for "Technology" text when scrolling to "Design"
+    // Fade-in Technology text
+    gsap.fromTo(
+      technologyRef.current,
+      { opacity: 0, y: 50 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: technologyRef.current,
+          start: "top 100%", // Start fading in when 80% of the viewport reaches the element
+          end: "top 60%",
+          scrub: true,
+        },
+      }
+    );
+
+    // Fade-out Technology text when scrolling to Design
     gsap.to(technologyRef.current, {
       opacity: 0,
-      onStart: () => {
-        technologyRef.current.classList.add("animate__fadeOutDown");
-      },
-      onReverseComplete: () => {
-        technologyRef.current.classList.remove("animate__fadeOutDown");
-      },
+      y: -50,
+      duration: 1,
+      ease: "power2.out",
       scrollTrigger: {
         trigger: designRef.current,
         start: "top 36%",
         end: "top 30%",
         scrub: true,
+        markers: true,
       },
     });
 
-    // Pin the Design section and ensure Marketing appears 5px below it
+    // Pin the Design section
     ScrollTrigger.create({
       trigger: designRef.current,
-      start: "top 30%",
+      start: "top 10%",
       end: () => `+=${marketingRef.current.offsetTop - designRef.current.offsetTop - 5}`,
       pin: true,
       scrub: true,
     });
 
-    // Staggered animation for Design list items
+    // Stagger animation for Design list items
     gsap.fromTo(
       designListRef.current.children,
-      { opacity: 0, x: -50 },
+      { opacity: 0, y: -80, x: -50 },
       {
         opacity: 1,
         x: 0,
@@ -63,16 +77,16 @@ const Client = () => {
       }
     );
 
-    // Pin the Marketing section separately for smooth transition
+    // Pin the Marketing section
     ScrollTrigger.create({
       trigger: marketingRef.current,
-      start: "top 30%",
+      start: "top 10%",
       end: "+=250",
       pin: true,
       scrub: true,
     });
 
-    // Staggered animation for Marketing list items
+    // Stagger animation for Marketing list items
     gsap.fromTo(
       marketingListRef.current.children,
       { opacity: 0, x: -50 },
@@ -91,7 +105,6 @@ const Client = () => {
       }
     );
 
-    // Cleanup function to remove ScrollTrigger instances on unmount
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
@@ -100,37 +113,31 @@ const Client = () => {
   return (
     <div>
       <section>
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: "easeOut" }}
+        <Box
+          sx={{
+            width: "50%",
+            marginLeft: "auto",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-start",
+            justifyContent: "center",
+            height: "100vh",
+          }}
         >
-          <Box
-            sx={{
-              width: "50%",
-              marginLeft: "auto",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "flex-start",
-              justifyContent: "center",
-              height: "100vh",
-            }}
-          >
-            <Typography variant="h2" sx={{ fontWeight: "bold" }}>
-              Innovate
-            </Typography>
-            <Typography variant="h2" sx={{ fontWeight: "bold" }}>
-              Elevate
-            </Typography>
-            <Typography variant="h2" sx={{ fontWeight: "bold" }}>
-              Accelerate
-            </Typography>
-            <Typography variant="h5" sx={{ width: "450px" }}>
-              We Redefine User Experiences Through the Power of Behavioral
-              Science.
-            </Typography>
-          </Box>
-        </motion.div>
+          <Typography variant="h2" sx={{ fontWeight: "bold" }}>
+            Innovate
+          </Typography>
+          <Typography variant="h2" sx={{ fontWeight: "bold" }}>
+            Elevate
+          </Typography>
+          <Typography variant="h2" sx={{ fontWeight: "bold" }}>
+            Accelerate
+          </Typography>
+          <Typography variant="h5" sx={{ width: "450px" }}>
+            We Redefine User Experiences Through the Power of Behavioral
+            Science.
+          </Typography>
+        </Box>
       </section>
 
       <section>
@@ -151,15 +158,15 @@ const Client = () => {
               Design
             </Typography>
 
-            {/* TECHNOLOGY TEXT (5px below Design) */}
+            {/* TECHNOLOGY TEXT WITH GSAP FADE IN/OUT */}
             <Typography
               ref={technologyRef}
               variant="h5"
-              className="animate__animated animate__fadeIn"
               sx={{
                 fontSize: "70px",
                 marginBottom: "5px",
                 fontWeight: "bold",
+                opacity: 0, // Initially hidden
               }}
             >
               Technology
@@ -175,7 +182,7 @@ const Client = () => {
             </List>
           </Box>
 
-          {/* MARKETING SECTION (directly below Design) */}
+          {/* MARKETING SECTION */}
           <Box
             ref={marketingRef}
             sx={{
