@@ -28,7 +28,7 @@ const Client = () => {
         scrollTrigger: {
           trigger: technologyRef.current,
           start: "top 100%", // Start fading in when 80% of the viewport reaches the element
-          end: "top 60%",
+          end: "top 50%",
           scrub: true,
         },
       }
@@ -142,6 +142,7 @@ const Client = () => {
 
       <section>
         <Box sx={{ height: "200vh", paddingTop: "30vh", textAlign: "center" }}>
+          <Box sx={{width: "25%", paddingLeft: "200px"}}>
           {/* DESIGN SECTION */}
           <Box
             ref={designRef}
@@ -169,7 +170,7 @@ const Client = () => {
                 opacity: 0, // Initially hidden
               }}
             >
-              Technology
+              Marketing
             </Typography>
 
             <List ref={designListRef} sx={{ listStyle: "none", padding: 0, fontSize: "30px" }}>
@@ -194,7 +195,7 @@ const Client = () => {
           >
             <Typography
               variant="h4"
-              sx={{ fontSize: "70px", marginBottom: "2vh" }}
+              sx={{ fontSize: "70px", fontWeight: "bold", marginBottom: "5px" }}
             >
               Marketing
             </Typography>
@@ -206,6 +207,7 @@ const Client = () => {
               <ListItem sx={{ padding: "2px 0" }}>Marketing five</ListItem>
               <ListItem sx={{ padding: "2px 0" }}>Marketing six</ListItem>
             </List>
+          </Box>
           </Box>
         </Box>
       </section>
