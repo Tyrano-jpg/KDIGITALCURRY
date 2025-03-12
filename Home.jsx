@@ -57,8 +57,6 @@ const Home = () => {
     };
   }, []);
 
-
-
   //animation section of texts
   const designRef = useRef(null);
   const technologyRef = useRef(null);
@@ -96,7 +94,7 @@ const Home = () => {
       ease: "power2.out",
       scrollTrigger: {
         trigger: designRef.current,
-        start: "top 36%",
+        start: "top 30%",
         end: "top 30%",
         scrub: true,
         markers: true,
@@ -107,7 +105,8 @@ const Home = () => {
     ScrollTrigger.create({
       trigger: designRef.current,
       start: "top 10%",
-      end: () => `+=${marketingRef.current.offsetTop - designRef.current.offsetTop - 5}`,
+      end: () =>
+        `+=${marketingRef.current.offsetTop - designRef.current.offsetTop - 5}`,
       pin: true,
       scrub: true,
     });
@@ -174,25 +173,51 @@ const Home = () => {
         >
           <Box
             sx={{
-              width: "50%",
+              width: { xs: "50%", sm: "50%", md: "50%", lg: "50%", xl: "50%" },
               marginLeft: "auto",
               display: "flex",
               flexDirection: "column",
               alignItems: "flex-start",
               justifyContent: "center",
               height: "100vh",
+              border: "1px solid green",
             }}
           >
-            <Typography variant="h2" sx={{ fontWeight: "bold" }}>
+            <Typography
+              variant="h2"
+              sx={{
+                fontWeight: "bold",
+                fontSize: { xs: "30px", sm: "35px", md: "40px", lg: "55px" },
+              }}
+            >
               Innovate
             </Typography>
-            <Typography variant="h2" sx={{ fontWeight: "bold" }}>
+            <Typography
+              variant="h2"
+              sx={{
+                fontWeight: "bold",
+                fontSize: { xs: "30px", sm: "35px", md: "40px", lg: "55px" },
+              }}
+            >
               Elevate
             </Typography>
-            <Typography variant="h2" sx={{ fontWeight: "bold" }}>
+            <Typography
+              variant="h2"
+              sx={{
+                fontWeight: "bold",
+                fontSize: { xs: "30px", sm: "35px", md: "40px", lg: "55px" },
+              }}
+            >
               Accelerate
             </Typography>
-            <Typography variant="h5" sx={{ width: "450px" }}>
+            <Typography
+              variant="h5"
+              sx={{
+                width: { xs: "200px", sm: "250px", md: "300px", lg: "450px" },
+                marginTop: "15px",
+                fontSize: { xs: "15px", sm: "20px", md: "25px", lg: "20px" },
+              }}
+            >
               We Redefine User Experiences Through the Power of Behavioral
               Science.
             </Typography>
@@ -209,6 +234,7 @@ const Home = () => {
             gap: 4,
             flexWrap: "wrap",
             padding: 2,
+            border: "1px solid black",
           }}
         >
           <img src={huggieslogo} alt="huggies" style={{ height: "50px" }} />
@@ -241,7 +267,8 @@ const Home = () => {
               display: "flex",
               justifyContent: "flex-start",
               alignItems: "center",
-              width: "900px",
+              width: { xs: "400px", sm: "500px", md: "600px", lg: "900px" },
+              border: "1px solid blue",
             }}
           >
             <Typography
@@ -257,77 +284,100 @@ const Home = () => {
       </section>
 
       <section>
-      <Box sx={{ height: "200vh", paddingTop: "30vh", textAlign: "center" }}>
-          <Box sx={{width: "25%", paddingLeft: "200px"}}>
-          {/* DESIGN SECTION */}
+        <Box sx={{ height: "200vh", paddingTop: "30vh", textAlign: "center" }}>
           <Box
-            ref={designRef}
             sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
+              width: "25%",
+              paddingLeft: {
+                xs: "150px",
+                sm: "200px",
+                md: "250px",
+                lg: "300px",
+              },
             }}
           >
-            <Typography
-              variant="h4"
-              sx={{ fontSize: "70px", fontWeight: "bold", marginBottom: "5px" }}
-            >
-              Design
-            </Typography>
-
-            {/* TECHNOLOGY TEXT WITH GSAP FADE IN/OUT */}
-            <Typography
-              ref={technologyRef}
-              variant="h5"
+            {/* DESIGN SECTION */}
+            <Box
+              ref={designRef}
               sx={{
-                fontSize: "70px",
-                marginBottom: "5px",
-                fontWeight: "bold",
-                opacity: 0, // Initially hidden
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
               }}
             >
-              Technology
-            </Typography>
+              <Typography
+                variant="h4"
+                sx={{
+                  fontSize: { xs: "40px", lg: "70px" },
+                  fontWeight: "bold",
+                  marginBottom: "5px",
+                }}
+              >
+                Design
+              </Typography>
 
-            <List ref={designListRef} sx={{ listStyle: "none", padding: 0, fontSize: "30px" }}>
-              <ListItem sx={{ padding: "2px 0" }}>Design one</ListItem>
-              <ListItem sx={{ padding: "2px 0" }}>Design two</ListItem>
-              <ListItem sx={{ padding: "2px 0" }}>Design three</ListItem>
-              <ListItem sx={{ padding: "2px 0" }}>Design four</ListItem>
-              <ListItem sx={{ padding: "2px 0" }}>Design five</ListItem>
-              <ListItem sx={{ padding: "2px 0" }}>Design six</ListItem>
-            </List>
-          </Box>
+              {/* TECHNOLOGY TEXT WITH GSAP FADE IN/OUT */}
+              <Typography
+                ref={technologyRef}
+                variant="h5"
+                sx={{
+                  fontSize: "70px",
+                  marginBottom: "5px",
+                  fontWeight: "bold",
+                  opacity: 0, // Initially hidden
+                }}
+              >
+                Marketing
+              </Typography>
 
-          {/* MARKETING SECTION */}
-          <Box
-            ref={marketingRef}
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              marginTop: "5px",
-            }}  
-          >
-            <Typography
-              variant="h4"
-              sx={{ fontSize: "70px", fontWeight: "bold", marginBottom: "5px" }}
+              <List
+                ref={designListRef}
+                sx={{ listStyle: "none", padding: 0, fontSize: "30px" }}
+              >
+                <ListItem sx={{ padding: "2px 0" }}>UI Design</ListItem>
+                <ListItem sx={{ padding: "2px 0" }}>UX Design</ListItem>
+                <ListItem sx={{ padding: "2px 0" }}>UX Consultancy</ListItem>
+                <ListItem sx={{ padding: "2px 0" }}>Design System</ListItem>
+                <ListItem sx={{ padding: "2px 0" }}>Animations</ListItem>
+                <ListItem sx={{ padding: "2px 0" }}>Illustrations</ListItem>
+              </List>
+            </Box>
+
+            {/* MARKETING SECTION */}
+            <Box
+              ref={marketingRef}
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                marginTop: "5px",
+              }}
             >
-              Marketing
-            </Typography>
-            <List ref={marketingListRef} sx={{ listStyle: "none", padding: 0, fontSize: "30px" }}>
-              <ListItem sx={{ padding: "2px 0" }}>Marketing one</ListItem>
-              <ListItem sx={{ padding: "2px 0" }}>Marketing two</ListItem>
-              <ListItem sx={{ padding: "2px 0" }}>Marketing three</ListItem>
-              <ListItem sx={{ padding: "2px 0" }}>Marketing four</ListItem>
-              <ListItem sx={{ padding: "2px 0" }}>Marketing five</ListItem>
-              <ListItem sx={{ padding: "2px 0" }}>Marketing six</ListItem>
-            </List>
-          </Box>
+              <Typography
+                variant="h4"
+                sx={{
+                  fontSize: "70px",
+                  fontWeight: "bold",
+                  marginBottom: "5px",
+                }}
+              >
+                Marketing
+              </Typography>
+              <List
+                ref={marketingListRef}
+                sx={{ listStyle: "none", padding: 0, fontSize: "30px" }}
+              >
+                <ListItem sx={{ padding: "2px 0" }}>Branding</ListItem>
+                <ListItem sx={{ padding: "2px 0" }}>Brand Name</ListItem>
+                <ListItem sx={{ padding: "2px 0" }}>Brand Guidelines</ListItem>
+                <ListItem sx={{ padding: "2px 0" }}>Strategyr</ListItem>
+                <ListItem sx={{ padding: "2px 0" }}>Digital Marketing</ListItem>
+                <ListItem sx={{ padding: "2px 0" }}>S.E.O.</ListItem>
+              </List>
+            </Box>
           </Box>
         </Box>
       </section>
-      
     </div>
   );
 };
