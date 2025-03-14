@@ -7,10 +7,12 @@ import sonylogo from "../images/sonylogo.jpg";
 import starlogo from "../images/starlogo.png";
 import tatalogo from "../images/tatalogo.png";
 import { Box, Typography, List, ListItem } from "@mui/material";
+import "./Home.css";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { MotionPathPlugin } from "gsap/MotionPathPlugin";
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
 
 const Home = () => {
   const sectionRef = useRef(null);
@@ -97,14 +99,13 @@ const Home = () => {
         start: "top 30%",
         end: "top 30%",
         scrub: true,
-        markers: true,
       },
     });
 
     // Pin the Design section
     ScrollTrigger.create({
       trigger: designRef.current,
-      start: "top 10%",
+      start: "top 20%",
       end: () =>
         `+=${marketingRef.current.offsetTop - designRef.current.offsetTop - 5}`,
       pin: true,
@@ -163,6 +164,76 @@ const Home = () => {
     };
   }, []);
 
+  const pathRefs = [useRef(null), useRef(null), useRef(null)];
+  const circleRefs = [useRef(null), useRef(null), useRef(null)];
+
+  useEffect(() => {
+    const totalHeight = document.body.scrollHeight - window.innerHeight;
+
+    pathRefs.forEach((pathRef, index) => {
+      const path = pathRef.current;
+      const circle = circleRefs[index].current;
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: document.body, // Trigger on body to sync with full page scroll
+          start: "top top",
+          end: () => `${totalHeight}px`,
+          scrub: true,
+          pin: false,
+          anticipatePin: 1,
+        },
+      });
+
+      // Move from 0% to 50%
+      tl.to(circle, {
+        motionPath: {
+          path: path,
+          align: path,
+          autoRotate: true,
+          alignOrigin: [0.5, 0.5],
+          start: 0,
+          end: 0.5,
+        },
+        ease: "none",
+      });
+
+      // Hide other circles at 50%
+      if (index !== 1) {
+        tl.to(
+          circle,
+          {
+            opacity: 0,
+            duration: 0.1,
+          },
+          "-=0.1"
+        );
+      }
+
+      // Pause at 50%
+      tl.to({}, { duration: 0.1 });
+
+      // Show all circles after the pause
+      tl.to(circleRefs, {
+        opacity: 1,
+        duration: 0.1,
+      });
+
+      // Move from 50% to 100%
+      tl.to(circle, {
+        motionPath: {
+          path: path,
+          align: path,
+          autoRotate: true,
+          alignOrigin: [0.5, 0.5],
+          start: 0.5,
+          end: 1,
+        },
+        ease: "none",
+      });
+    });
+  }, []);
+
   return (
     <div>
       <section>
@@ -179,8 +250,7 @@ const Home = () => {
               flexDirection: "column",
               alignItems: "flex-start",
               justifyContent: "center",
-              height: "100vh",
-              border: "1px solid green",
+              height: "80vh",
             }}
           >
             <Typography
@@ -231,18 +301,17 @@ const Home = () => {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            gap: 4,
+            gap: 7,
             flexWrap: "wrap",
             padding: 2,
-            border: "1px solid black",
           }}
         >
-          <img src={huggieslogo} alt="huggies" style={{ height: "50px" }} />
-          <img src={bmwlogo} alt="bmw" style={{ height: "50px" }} />
-          <img src={PnGlogo} alt="P&G" style={{ height: "50px" }} />
+          <img src={huggieslogo} alt="huggies" style={{ height: "30px" }} />
+          <img src={tatalogo} alt="tata" style={{ height: "50px" }} />
           <img src={sonylogo} alt="sony" style={{ height: "50px" }} />
           <img src={starlogo} alt="star" style={{ height: "50px" }} />
-          <img src={tatalogo} alt="tata" style={{ height: "50px" }} />
+          <img src={bmwlogo} alt="bmw" style={{ height: "50px" }} />
+          <img src={PnGlogo} alt="P&G" style={{ height: "50px" }} />
         </Box>
       </section>
 
@@ -267,8 +336,7 @@ const Home = () => {
               display: "flex",
               justifyContent: "flex-start",
               alignItems: "center",
-              width: { xs: "400px", sm: "500px", md: "600px", lg: "900px" },
-              border: "1px solid blue",
+              width: { xs: "200px", sm: "500px", md: "600px", lg: "900px" },
             }}
           >
             <Typography
@@ -284,7 +352,20 @@ const Home = () => {
       </section>
 
       <section>
-        <Box sx={{ height: "200vh", paddingTop: "30vh", textAlign: "center" }}>
+        <Box
+          sx={{
+            height: "200vh",
+            paddingTop: "40vh",
+            textAlign: "center",
+            width: {
+              xs: "100%",
+              sm: "100%",
+              md: "100%",
+              lg: "100%",
+              xl: "100",
+            },
+          }}
+        >
           <Box
             sx={{
               width: "25%",
@@ -324,6 +405,7 @@ const Home = () => {
                   fontSize: "70px",
                   marginBottom: "5px",
                   fontWeight: "bold",
+                  paddingLeft: "90px",
                   opacity: 0, // Initially hidden
                 }}
               >
@@ -359,6 +441,7 @@ const Home = () => {
                   fontSize: "70px",
                   fontWeight: "bold",
                   marginBottom: "5px",
+                  paddingLeft: "90px",
                 }}
               >
                 Marketing
@@ -370,13 +453,76 @@ const Home = () => {
                 <ListItem sx={{ padding: "2px 0" }}>Branding</ListItem>
                 <ListItem sx={{ padding: "2px 0" }}>Brand Name</ListItem>
                 <ListItem sx={{ padding: "2px 0" }}>Brand Guidelines</ListItem>
-                <ListItem sx={{ padding: "2px 0" }}>Strategyr</ListItem>
+                <ListItem sx={{ padding: "2px 0" }}>Strategy</ListItem>
                 <ListItem sx={{ padding: "2px 0" }}>Digital Marketing</ListItem>
                 <ListItem sx={{ padding: "2px 0" }}>S.E.O.</ListItem>
               </List>
             </Box>
           </Box>
         </Box>
+      </section>
+
+      <section>
+        <Box
+          sx={{
+            marginTop: "100px",
+            marginBottom: "50px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Typography
+            sx={{
+              fontSize: "40px",
+              fontWeight: "bold",
+              width: "990px",
+            }}
+          >
+            We are a global creative agency that seamlessly blends design
+            excellence, cutting-edge technology, and strategic intelligence to
+            craft impactful experiences.
+          </Typography>
+        </Box>
+      </section>
+
+      <section>
+      <div className="wrapper">
+      {/* Fixed SVG (Circles Move Along Paths) */}
+      <div className="svg-overlay">
+        <svg viewBox="0 0 900 700" width="900" height="700">
+          {/* First Path - Red Circle */}
+          <path
+            ref={pathRefs[0]}
+            d="M50 100 C 150 0, 350 0, 450 100 S 850 300, 900 100"
+            fill="none"
+            stroke="transparent"
+            strokeWidth="2"
+          />
+          <circle ref={circleRefs[0]} cx="0" cy="0" r="20" fill="red" />
+
+          {/* Second Path - Blue Circle */}
+          <path
+            ref={pathRefs[1]}
+            d="M122.741 1C122.741 1 80.8639 125.83 122.741 183.5C155.888 229.146 178.24 328.5 252.241 247.5C326.242 166.5 58.1637 200.847 44.2413 282C30.3074 363.22 220.434 301.566 229.241 383.5C239.543 479.332 10.2843 382.041 1.24126 478C-8.61168 582.553 286.799 475.332 252.241 574.5C234.88 624.319 65.7422 506 149.741 662.5"
+            fill="none"
+            stroke="transparent"
+            strokeWidth="2"
+          />
+          <circle ref={circleRefs[1]} cx="0" cy="0" r="20" fill="blue" />
+
+          {/* Third Path - Green Circle */}
+          <path
+            ref={pathRefs[2]}
+            d="M50 300 C 150 200, 350 200, 450 300 S 850 500, 900 300"
+            fill="none"
+            stroke="transparent"
+            strokeWidth="2"
+          />
+          <circle ref={circleRefs[2]} cx="0" cy="0" r="20" fill="green" />
+        </svg>
+      </div>
+    </div>
       </section>
     </div>
   );
