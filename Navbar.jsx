@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import { motion } from "framer-motion";
 import {
   AppBar,
@@ -81,16 +80,16 @@ const Navbar = () => {
   };
 
   return (
-    <div style={{ borderBottom: "1px solid black" }}>
+    <div>
       <AppBar
-        position="sticky"
         sx={{
           backgroundColor: "#fff",
           boxShadow: "none",
           height: "50px",
           px: 5,
-          top: 0,
           zIndex: 1000,
+          borderBottom: expanded ? "none" : "1px solid black", // Remove border when expanded
+          transition: "border-bottom 0.3s ease", // Smooth transition
         }}
       >
         <Box
@@ -99,7 +98,7 @@ const Navbar = () => {
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            marginTop: "5px"
+            marginTop: "5px",
           }}
         >
           {/* Logo */}
@@ -155,58 +154,70 @@ const Navbar = () => {
 
           {/* Contact Button */}
           <Box sx={{ display: { xs: "none", md: "block" } }}>
-            <Link to="/contactus" style={{ textDecoration: "none" }}>
-              <Button
-                variant="contained"
-                sx={{
-                  backgroundColor: "#000",
-                  color: "#fff",
-                  fontWeight: "bold",
-                  height: "35px",
-                  width: "140px",
-                  overflow: "hidden",
-                  position: "relative",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <motion.div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    height: "100%",
-                    overflow: "hidden",
-                  }}
-                  initial="initial"
-                  whileHover="hover"
-                >
-                  <motion.span
-                    style={{ display: "block" }}
-                    variants={{
-                      initial: { y: "0%" },
-                      hover: { y: "-100%" },
-                    }}
-                    transition={{ duration: 0.3, ease: "easeInOut" }}
-                  >
-                    Contact
-                  </motion.span>
-                  <motion.span
-                    style={{ display: "block", position: "absolute" }}
-                    variants={{
-                      initial: { y: "100%" },
-                      hover: { y: "0%" },
-                    }}
-                    transition={{ duration: 0.3, ease: "easeInOut" }}
-                  >
-                    Contact
-                  </motion.span>
-                </motion.div>
-              </Button>
-            </Link>
-          </Box>
+  <Link to="/contactus" style={{ textDecoration: "none" }}>
+    <motion.div
+      whileHover="hover"
+      initial="initial"
+      style={{
+        height: "35px",
+        width: "140px",
+        overflow: "hidden",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <Button
+        variant="contained"
+        sx={{
+          backgroundColor: "#000",
+          color: "#fff",
+          fontWeight: "bold",
+          height: "100%",
+          width: "100%",
+          overflow: "hidden",
+          position: "relative",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <motion.div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            height: "100%",
+            overflow: "hidden",
+          }}
+        >
+          <motion.span
+            style={{ display: "block" }}
+            variants={{
+              initial: { y: "0%" },
+              hover: { y: "-100%" },
+            }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+          >
+            Contact
+          </motion.span>
+          <motion.span
+            style={{ display: "block", position: "absolute" }}
+            variants={{
+              initial: { y: "100%" },
+              hover: { y: "0%" },
+            }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+          >
+            Contact
+          </motion.span>
+        </motion.div>
+      </Button>
+    </motion.div>
+  </Link>
+</Box>
+
 
           {/* Hamburger Menu */}
           <IconButton
@@ -309,16 +320,17 @@ const Navbar = () => {
           <Box
             sx={{
               position: "fixed",
-              top: 70,
+              top: 45,
               left: 0,
               width: "100%",
-              backgroundColor: "#fff",
+              backgroundColor: "#fff", // Solid background color
               p: 3,
               display: "flex",
               justifyContent: "center",
               gap: 2,
               borderBottom: "1px solid black",
               zIndex: 10,
+              boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)", // Optional: Adds subtle shadow
             }}
             onMouseLeave={() => setExpanded(null)}
           >
@@ -326,13 +338,18 @@ const Navbar = () => {
               <Box
                 key={index}
                 sx={{
+                  position: "relative",
                   width: 250,
                   backgroundColor: card.color,
                   p: 2,
                   borderRadius: 1,
                   cursor: "pointer",
+                  overflow: "hidden",
                   transition: "transform 0.3s",
-                  "&:hover": { transform: "scale(1.05)" },
+                  "&:hover": {
+                    transform: "scale(1.05)",
+                    backgroundColor: card.hoverColor,
+                  },
                 }}
               >
                 <Link
