@@ -6,7 +6,7 @@ import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
 gsap.registerPlugin(ScrollTrigger, MotionPathPlugin, ScrollToPlugin);
 
-const AnimatedSection = () => {
+const Design = () => {
   const ball1Ref = useRef(null);
   const ball2Ref = useRef(null);
   const textRef = useRef(null);
@@ -247,4 +247,4 @@ const AnimatedSection = () => {
   );
 };
 
-export default AnimatedSection;
+export default Design;
