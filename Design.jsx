@@ -122,6 +122,14 @@ const Design = () => {
                   transform="translate(370, 350) scale(1.5)"
                 />
 
+                <image
+                  href="src/images/blub.png"
+                  x="520"
+                  y="430"
+                  width="180"
+                  height="300"
+                />
+
                 <circle
                   ref={ball1Ref}
                   cx="600"
@@ -149,9 +157,10 @@ const Design = () => {
                 alignItems: "center",
               }}
             >
+              {/* BreadCrumbs section  */}
               <Box
                 style={{
-                  marginTop: "-400px",
+                  marginTop: "-450px",
                   marginRight: "250px",
                   textAlign: "left",
                   gap: "40px",
@@ -162,7 +171,7 @@ const Design = () => {
                   variant="h5"
                   style={{ color: "rgb(255, 57, 104)", fontWeight: "600" }}
                 >
-                  Design
+                  DESIGN
                 </Typography>
                 <Breadcrumbs aria-label="breadcrumb">
                   <Link
@@ -189,9 +198,10 @@ const Design = () => {
                   >
                     Services
                   </Link>
-                  <Typography color="text.primary">Technology</Typography>
+                  <Typography color="text.primary">Design</Typography>
                 </Breadcrumbs>
               </Box>
+
               <Box
                 sx={{ height: "150px", display: "flex", alignItems: "center" }}
               >
@@ -205,10 +215,10 @@ const Design = () => {
                     position: "absolute",
                     left: "50%",
                     maxWidth: "30%",
-                    fontWeight: "600"
+                    fontWeight: "750",
                   }}
                 >
-                    We create designs to augment User Experiences.
+                  We create designs to augment User Experiences.
                 </Typography>
 
                 {/* Second Text */}
@@ -216,12 +226,13 @@ const Design = () => {
                   ref={secondTextRef}
                   variant="h5"
                   sx={{
-                    fontSize: "2rem",
+                    fontSize: "40px",
                     opacity: 0,
                     textAlign: "left",
                     position: "absolute",
+                    fontWeight: "700",
                     left: "50%",
-                    maxWidth: "45%",
+                    maxWidth: "35%",
                   }}
                 >
                   <strong>
