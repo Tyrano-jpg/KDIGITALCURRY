@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { Box, Container, Typography, Breadcrumbs } from "@mui/material";
+import { Box, Container, Typography, Breadcrumbs, Paper } from "@mui/material";
 import { Link } from "react-router-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -77,6 +77,65 @@ const Design = () => {
       tl.kill();
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
+  }, []);
+
+  const items = [
+    "Service 1",
+    "Service 2",
+    "Service 3",
+    "Service 4",
+    "Service 5",
+    "Service 6",
+    "Service 7",
+    "Service 8",
+    "Service 9",
+    "Service 10",
+    "Service 11",
+    "Service 12",
+  ];
+
+  const linesRef = useRef([]);
+
+  useEffect(() => {
+    linesRef.current.forEach((line, index) => {
+      gsap.fromTo(
+        line,
+        { width: 0 },
+        {
+          width: "40px",
+          duration: 1.2,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: line,
+            start: "top 90%",
+            toggleActions: "play none none reset",
+          },
+        }
+      );
+    });
+  }, []);
+
+  const secondSectionRef = useRef(null);
+  const secondCircleRef = useRef(null);
+
+  useEffect(() => {
+    gsap.fromTo(
+      secondCircleRef.current,
+      { y: -200, scale: 0, opacity: 0 },
+      {
+        y: 50,
+        scale: 5,
+        opacity: 1,
+        duration: 1.5,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: secondSectionRef.current,
+          start: "top 80%", // Starts when 80% of the section is in view
+          end: "center 50%",
+          scrub: true,
+        },
+      }
+    );
   }, []);
 
   return (
@@ -247,22 +306,87 @@ const Design = () => {
         </Box>
 
         {/* Dummy Content */}
-        {["#f0f0f0", "#d0d0d0", "#b0b0b0"].map((bg, index) => (
+      </section>
+
+      <section ref={secondSectionRef} style={{ position: "relative", padding: "20px 250px" }}>
+      {/* Animated Circle */}
+      <div
+        ref={secondCircleRef}
+        style={{
+          position: "absolute",
+          left: "45%",
+          top: "23%",
+          transform: "translateX(-50%)",
+          width: "70px",
+          height: "70px",
+          backgroundColor: "rgb(255, 130, 151)",
+          borderRadius: "50%",
+          zIndex: -1, // Ensures it stays behind the text
+        }}
+      />
+
+      {/* Header Section */}
+      <Box textAlign="left" mb={4}>
+        <Typography
+          variant="h4"
+          gutterBottom
+          sx={{
+            marginTop: "60px",
+            marginBottom: "20px",
+            color: "rgb(246, 86, 113)",
+            fontSize: "23px",
+            fontWeight: "770",
+          }}
+        >
+          What do we serve?
+        </Typography>
+        <Typography variant="h3" sx={{ fontSize: "50px", fontWeight: "bold" }}>
+          We help you translate
+        </Typography>
+        <Typography variant="h3" sx={{ fontSize: "50px", fontWeight: "bold" }}>
+          a simple idea into an exotic
+        </Typography>
+        <Typography variant="h3" sx={{ fontSize: "50px", fontWeight: "bold" }}>
+          Digital design transformation vision.
+        </Typography>
+      </Box>
+
+      {/* List Section */}
+      <Box display="flex" flexWrap="wrap" justifyContent="space-between">
+        {items.map((item, index) => (
           <Box
             key={index}
             sx={{
-              height: "100vh",
-              background: bg,
               display: "flex",
-              justifyContent: "center",
               alignItems: "center",
-              fontSize: "2rem",
+              width: "23%",
+              padding: "16px 0",
+              textAlign: "left",
+              marginBottom: "16px",
+              "&:hover .hover-line": {
+                backgroundPosition: "40px 0",
+                transition: "background-position 2s linear",
+              },
             }}
           >
-            <strong>Dummy Content {index + 1}</strong>
+            <Box
+              ref={(el) => (linesRef.current[index] = el)}
+              className="hover-line"
+              sx={{
+                width: "40px",
+                height: "2px",
+                marginRight: "8px",
+                backgroundImage:
+                  "repeating-linear-gradient(40deg, black, black 2.5px, transparent 3.5px, transparent 6px)",
+                backgroundSize: "40px 100%",
+                backgroundPosition: "0 0",
+              }}
+            />
+            <Typography sx={{fontSize: "23px", fontWeight: "bold"}}>{item}</Typography>
           </Box>
         ))}
-      </section>
+      </Box>
+    </section>
     </>
   );
 };
