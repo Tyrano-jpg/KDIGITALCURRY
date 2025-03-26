@@ -193,14 +193,14 @@ const Design = () => {
                   ref={ball1Ref}
                   cx="600"
                   cy="200"
-                  r="24"
+                  r="32"
                   fill="rgb(246, 86, 113)"
                 />
                 <circle
                   ref={ball2Ref}
                   cx="600"
                   cy="1000"
-                  r="24"
+                  r="32"
                   fill="rgb(246, 86, 113)"
                 />
               </svg>
