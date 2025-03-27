@@ -470,6 +470,7 @@ const Home = () => {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
+            padding: "0px 300px",
           }}
         >
           <Typography
@@ -479,50 +480,60 @@ const Home = () => {
               width: "990px",
             }}
           >
-            We are a global creative agency that seamlessly blends design
-            excellence, cutting-edge technology, and strategic intelligence to
-            craft impactful experiences.
+            As global leaders in UX UI, technology, and marketing solutions, we
+            partner with clients to simplify, strengthen, and transform their
+            businesses.
           </Typography>
         </Box>
       </section>
 
       <section>
-      <div className="wrapper">
-      {/* Fixed SVG (Circles Move Along Paths) */}
-      <div className="svg-overlay">
-        <svg viewBox="0 0 900 700" width="900" height="700">
-          {/* First Path - Red Circle */}
-          <path
-            ref={pathRefs[0]}
-            d="M50 100 C 150 0, 350 0, 450 100 S 850 300, 900 100"
-            fill="none"
-            stroke="transparent"
-            strokeWidth="2"
-          />
-          <circle ref={circleRefs[0]} cx="0" cy="0" r="20" fill="red" />
+        <div className="wrapper" style={{overflow: "hidden"}}>
+          {/* Fixed SVG (Circles Move Along Paths) */}
+          <div
+            className="svg-overlay"
+            style={{
+              position: "fixed",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              pointerEvents: "none",
+            }}
+          >
+            <svg viewBox="0 0 900 700" width="900" height="700">
+              {/* First Path - Red Circle */}
+              <path
+                ref={pathRefs[0]}
+                d="M50 100 C 150 0, 350 0, 450 100 S 850 300, 900 100"
+                fill="none"
+                stroke="transparent"
+                strokeWidth="2"
+              />
+              <circle ref={circleRefs[0]} cx="0" cy="0" r="20" fill="red" />
 
-          {/* Second Path - Blue Circle */}
-          <path
-            ref={pathRefs[1]}
-            d="M 122.741 1 C 122.741 1 73 125 122.741 183.5 C 171 145 137 13 263 97 C 326.242 166.5 58.1637 200.847 116 235 C 30.3074 363.22 213 179 309 153 C 420 328 10.2843 382.041 0 399 C -502 488 17 470 101 487 C 367 576 65.7422 506 149.741 662.5"
-            fill="none"
-            stroke="transparent"
-            strokeWidth="2"
-          />
-          <circle ref={circleRefs[1]} cx="0" cy="0" r="20" fill="blue" />
+              {/* Second Path - Blue Circle */}
+              <path
+                ref={pathRefs[1]}
+                d="M 122.741 1 C 122.741 1 73 125 122.741 183.5 C 171 145 137 13 263 97 C 326.242 166.5 58.1637 200.847 116 235 C 30.3074 363.22 213 179 309 153 C 420 328 10.2843 382.041 0 399 C -502 488 17 470 101 487 C 367 576 65.7422 506 149.741 662.5"
+                fill="none"
+                stroke="transparent"
+                strokeWidth="2"
+              />
+              <circle ref={circleRefs[1]} cx="0" cy="0" r="20" fill="blue" />
 
-          {/* Third Path - Green Circle */}
-          <path
-            ref={pathRefs[2]}
-            d="M50 300 C 150 200, 350 200, 450 300 S 850 500, 900 300"
-            fill="none"
-            stroke="transparent"
-            strokeWidth="2"
-          />
-          <circle ref={circleRefs[2]} cx="0" cy="0" r="20" fill="green" />
-        </svg>
-      </div>
-    </div>
+              {/* Third Path - Green Circle */}
+              <path
+                ref={pathRefs[2]}
+                d="M50 300 C 150 200, 350 200, 450 300 S 850 500, 900 300"
+                fill="none"
+                stroke="transparent"
+                strokeWidth="2"
+              />
+              <circle ref={circleRefs[2]} cx="0" cy="0" r="20" fill="green" />
+            </svg>
+          </div>
+        </div>
       </section>
     </div>
   );
