@@ -1,5 +1,11 @@
 import React, { useEffect, useRef } from "react";
-import { Box, Container, Typography, Breadcrumbs, Paper } from "@mui/material";
+import {
+  Box,
+  Container,
+  Typography,
+  Breadcrumbs,
+  SvgIcon,
+} from "@mui/material";
 import { Link } from "react-router-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -140,7 +146,7 @@ const Design = () => {
 
   return (
     <>
-      <section>
+      <section style={{ border: "1px solid black", overflow: "hidden" }}>
         <Box ref={sectionRef} sx={{ height: "200vh" }}>
           <Box
             ref={contentRef}
@@ -154,15 +160,26 @@ const Design = () => {
             {/* Left Side - SVG Animation */}
             <Box
               sx={{
-                maxWidth: "50vw",
+                maxWidth: "100vw",
                 flex: 1,
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
                 pl: 6,
+                "@media (min-width: 320px)": {
+                  pl: 0.5, // Reduce padding further
+                },
               }}
             >
-              <svg width="100%" height="100%" viewBox="0 0 1200 1200">
+              <svg
+                viewBox="0 0 1200 1200"
+                preserveAspectRatio="xMidYMid meet"
+                style={{
+                  width: "100%", // Default for larger screens
+                  height: "auto",
+                  maxWidth: "600px", // Default max size
+                }}
+              >
                 <path
                   id="dottedPath"
                   d="M600,200 a400,400 0 1,1 -0.1,0"
@@ -204,11 +221,30 @@ const Design = () => {
                   fill="rgb(246, 86, 113)"
                 />
               </svg>
+
+              {/* CSS for media queries */}
+              <style>
+                {`
+                @media (max-width: 480px) {
+                  svg {
+                    width: 130% !important; /* Increase size */
+                    max-width: 900px !important; /* Expand max size */
+                  }
+                }
+                @media (max-width: 320px) {
+                  svg {
+                    width: 140% !important; /* Further increase for 320px */
+                    max-width: 950px !important;
+                  }
+                }
+              `}
+              </style>
             </Box>
 
             {/* Right Side - Text Content */}
             <Box
               sx={{
+                border: "1px solid blue",
                 maxWidth: "50vw",
                 flex: 1,
                 display: "flex",
@@ -269,7 +305,12 @@ const Design = () => {
                   ref={textRef}
                   variant="h1"
                   sx={{
-                    fontSize: "60px",
+                    fontSize: {
+                      xs: "20px",
+                      sm: "10px",
+                      lg: "40px",
+                      xl: "60px",
+                    },
                     textAlign: "left",
                     position: "absolute",
                     left: "50%",
@@ -285,13 +326,19 @@ const Design = () => {
                   ref={secondTextRef}
                   variant="h5"
                   sx={{
-                    fontSize: "40px",
+                    fontSize: {
+                      xs: "20px",
+                      sm: "10px",
+                      lg: "40px",
+                      xl: "42px",
+                    },
                     opacity: 0,
                     textAlign: "left",
                     position: "absolute",
                     fontWeight: "700",
                     left: "50%",
                     maxWidth: "35%",
+                    marginTop: "20px",
                   }}
                 >
                   <strong>
@@ -308,85 +355,103 @@ const Design = () => {
         {/* Dummy Content */}
       </section>
 
-      <section ref={secondSectionRef} style={{ position: "relative", padding: "20px 250px" }}>
-      {/* Animated Circle */}
-      <div
-        ref={secondCircleRef}
+      <section
+        ref={secondSectionRef}
         style={{
-          position: "absolute",
-          left: "45%",
-          top: "23%",
-          transform: "translateX(-50%)",
-          width: "70px",
-          height: "70px",
-          backgroundColor: "rgb(255, 130, 151)",
-          borderRadius: "50%",
-          zIndex: -1, // Ensures it stays behind the text
+          position: "relative",
+          padding: "20px 250px",
+          overflow: "hidden",
         }}
-      />
-
-      {/* Header Section */}
-      <Box textAlign="left" mb={4}>
-        <Typography
-          variant="h4"
-          gutterBottom
-          sx={{
-            marginTop: "60px",
-            marginBottom: "20px",
-            color: "rgb(246, 86, 113)",
-            fontSize: "23px",
-            fontWeight: "770",
+      >
+        {/* Animated Circle */}
+        <div
+          ref={secondCircleRef}
+          style={{
+            position: "absolute",
+            left: "45%",
+            top: "23%",
+            transform: "translateX(-50%)",
+            width: "70px",
+            height: "70px",
+            backgroundColor: "rgb(255, 130, 151)",
+            borderRadius: "50%",
+            zIndex: -1, // Ensures it stays behind the text
           }}
-        >
-          What do we serve?
-        </Typography>
-        <Typography variant="h3" sx={{ fontSize: "50px", fontWeight: "bold" }}>
-          We help you translate
-        </Typography>
-        <Typography variant="h3" sx={{ fontSize: "50px", fontWeight: "bold" }}>
-          a simple idea into an exotic
-        </Typography>
-        <Typography variant="h3" sx={{ fontSize: "50px", fontWeight: "bold" }}>
-          Digital design transformation vision.
-        </Typography>
-      </Box>
+        />
 
-      {/* List Section */}
-      <Box display="flex" flexWrap="wrap" justifyContent="space-between">
-        {items.map((item, index) => (
-          <Box
-            key={index}
+        {/* Header Section */}
+        <Box textAlign="left" mb={4}>
+          <Typography
+            variant="h4"
+            gutterBottom
             sx={{
-              display: "flex",
-              alignItems: "center",
-              width: "23%",
-              padding: "16px 0",
-              textAlign: "left",
-              marginBottom: "16px",
-              "&:hover .hover-line": {
-                backgroundPosition: "40px 0",
-                transition: "background-position 2s linear",
-              },
+              marginTop: "60px",
+              marginBottom: "20px",
+              color: "rgb(246, 86, 113)",
+              fontSize: "23px",
+              fontWeight: "770",
             }}
           >
+            What do we serve?
+          </Typography>
+          <Typography
+            variant="h3"
+            sx={{ fontSize: "50px", fontWeight: "bold" }}
+          >
+            We help you translate
+          </Typography>
+          <Typography
+            variant="h3"
+            sx={{ fontSize: "50px", fontWeight: "bold" }}
+          >
+            a simple idea into an exotic
+          </Typography>
+          <Typography
+            variant="h3"
+            sx={{ fontSize: "50px", fontWeight: "bold" }}
+          >
+            Digital design transformation vision.
+          </Typography>
+        </Box>
+
+        {/* List Section */}
+        <Box display="flex" flexWrap="wrap" justifyContent="space-between">
+          {items.map((item, index) => (
             <Box
-              ref={(el) => (linesRef.current[index] = el)}
-              className="hover-line"
+              key={index}
               sx={{
-                width: "40px",
-                height: "2px",
-                marginRight: "8px",
-                backgroundImage:
-                  "repeating-linear-gradient(40deg, black, black 2.5px, transparent 3.5px, transparent 6px)",
-                backgroundSize: "40px 100%",
-                backgroundPosition: "0 0",
+                display: "flex",
+                alignItems: "center",
+                width: "23%",
+                padding: "16px 0",
+                textAlign: "left",
+                marginBottom: "16px",
+                "&:hover .hover-line": {
+                  backgroundPosition: "40px 0",
+                  transition: "background-position 2s linear",
+                },
               }}
-            />
-            <Typography sx={{fontSize: "23px", fontWeight: "bold"}}>{item}</Typography>
-          </Box>
-        ))}
-      </Box>
-    </section>
+            >
+              <Box
+                ref={(el) => (linesRef.current[index] = el)}
+                className="hover-line"
+                sx={{
+                  width: "40px",
+                  height: "2px",
+                  marginRight: "8px",
+                  backgroundImage:
+                    "repeating-linear-gradient(40deg, black, black 2.5px, transparent 3.5px, transparent 6px)",
+                  backgroundSize: "40px 100%",
+                  backgroundPosition: "0 0",
+                }}
+              />
+              <Typography sx={{ fontSize: "23px", fontWeight: "bold" }}>
+                {item}
+              </Typography>
+            </Box>
+          ))}
+        </Box>
+      </section>
     </>
   );
 };
