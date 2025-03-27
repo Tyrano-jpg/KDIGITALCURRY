@@ -146,7 +146,7 @@ const Design = () => {
 
   return (
     <>
-      <section style={{ border: "1px solid black", overflow: "hidden" }}>
+      <section style={{ overflow: "hidden" }}>
         <Box ref={sectionRef} sx={{ height: "200vh" }}>
           <Box
             ref={contentRef}
@@ -155,6 +155,10 @@ const Design = () => {
               height: "100vh",
               position: "sticky",
               top: 0,
+              flexDirection: "row",
+              "@media (max-width: 320px)": {
+                flexDirection: "row", // Keep horizontal layout
+              },
             }}
           >
             {/* Left Side - SVG Animation */}
@@ -167,7 +171,8 @@ const Design = () => {
                 alignItems: "center",
                 pl: 6,
                 "@media (min-width: 320px)": {
-                  pl: 0.5, // Reduce padding further
+                  flex: "70%", // 60% width on small screens
+                  pl: 0, // Reduce padding further
                 },
               }}
             >
@@ -244,31 +249,66 @@ const Design = () => {
             {/* Right Side - Text Content */}
             <Box
               sx={{
-                border: "1px solid blue",
                 maxWidth: "50vw",
                 flex: 1,
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
+                "@media (min-width: 320px)": {
+                  flex: "30%", // 40% width on small screens
+                  pl: -1,
+                },
               }}
             >
               {/* BreadCrumbs section  */}
               <Box
-                style={{
-                  marginTop: "-450px",
-                  marginRight: "250px",
+                sx={{
+                  marginTop: { xs: "-250px", xl: "-450px" },
+                  marginRight: { xs: "100px", xl: "250px" },
                   textAlign: "left",
                   gap: "40px",
-                  width: "500px",
+                  width: { xs: "600px", sm: "800px", xl: "500px" },
                 }}
               >
                 <Typography
                   variant="h5"
-                  style={{ color: "rgb(255, 57, 104)", fontWeight: "600" }}
+                  sx={{
+                    color: "rgb(255, 57, 104)",
+                    fontWeight: "600",
+                    position: "relative",
+                    display: "inline-block",
+                  }}
                 >
                   DESIGN
+                  {/* Moving Dotted Line */}
+                  <Box
+                    sx={{
+                      position: "absolute",
+                      bottom: "-5px",
+                      left: 0,
+                      width: "100%",
+                      height: "2px",
+                      overflow: "hidden",
+                      "&::before": {
+                        content: '""',
+                        display: "block",
+                        width: "200%",
+                        height: "100%",
+                        background:
+                          "linear-gradient(to right, rgb(246, 86, 113) 50%, transparent 50%)",
+                        backgroundSize: "20px 2px",
+                        top: "-20px",
+                        animation: "moveDots 2.5s linear infinite",
+                      },
+                      "@keyframes moveDots": {
+                        "0%": { transform: "translateX(-50%)" },
+                        "100%": { transform: "translateX(0%)" },
+                      },
+                    }}
+                  />
                 </Typography>
-                <Breadcrumbs aria-label="breadcrumb">
+
+                <Breadcrumbs aria-label="breadcrumb" sx={{ marginTop: "10px" }}>
                   <Link
                     to="/"
                     style={{
@@ -351,8 +391,6 @@ const Design = () => {
             </Box>
           </Box>
         </Box>
-
-        {/* Dummy Content */}
       </section>
 
       <section
