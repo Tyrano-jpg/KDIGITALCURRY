@@ -85,19 +85,19 @@ const Design = () => {
     };
   }, []);
 
-  const items = [
-    "Service 1",
-    "Service 2",
-    "Service 3",
-    "Service 4",
-    "Service 5",
-    "Service 6",
-    "Service 7",
-    "Service 8",
-    "Service 9",
-    "Service 10",
-    "Service 11",
-    "Service 12",
+  const services = [
+    { name: "Service 1", link: "/" },
+    { name: "Service 2", link: "/service2" },
+    { name: "Service 3", link: "/service3" },
+    { name: "Service 4", link: "/service4" },
+    { name: "Service 5", link: "/service5" },
+    { name: "Service 6", link: "/service6" },
+    { name: "Service 7", link: "/service7" },
+    { name: "Service 8", link: "/service8" },
+    { name: "Service 9", link: "/service9" },
+    { name: "Service 10", link: "/service10" },
+    { name: "Service 11", link: "/service11" },
+    { name: "Service 12", link: "/service12" },
   ];
 
   const linesRef = useRef([]);
@@ -156,8 +156,11 @@ const Design = () => {
               position: "sticky",
               top: 0,
               flexDirection: "row",
-              "@media (max-width: 320px)": {
+              "@media (min-width: 320px)": {
                 flexDirection: "row", // Keep horizontal layout
+              },
+              "@media (min-width: 1114px)": {
+                marginTop: "70px", // Keep horizontal layout
               },
             }}
           >
@@ -171,7 +174,15 @@ const Design = () => {
                 alignItems: "center",
                 pl: 6,
                 "@media (min-width: 320px)": {
-                  flex: "70%", // 60% width on small screens
+                  flex: "50%", // 60% width on small screens
+                  pl: 0, // Reduce padding further
+                },
+                "@media (min-width: 375px)": {
+                  flex: "50%", // 60% width on small screens
+                  pl: 0, // Reduce padding further
+                },
+                "@media (min-width: 1114px)": {
+                  flex: "50%", // 60% width on small screens
                   pl: 0, // Reduce padding further
                 },
               }}
@@ -255,7 +266,11 @@ const Design = () => {
                 justifyContent: "center",
                 alignItems: "center",
                 "@media (min-width: 320px)": {
-                  flex: "30%", // 40% width on small screens
+                  flex: "20%", // 40% width on small screens
+                  pl: -1,
+                },
+                "@media (min-width: 1114px)": {
+                  flex: "50%", // 40% width on small screens
                   pl: -1,
                 },
               }}
@@ -263,11 +278,44 @@ const Design = () => {
               {/* BreadCrumbs section  */}
               <Box
                 sx={{
-                  marginTop: { xs: "-250px", xl: "-450px" },
-                  marginRight: { xs: "100px", xl: "250px" },
+                  marginTop: { xs: "-300px", sm: "-400px", xl: "-450px" },
+                  marginRight: { xs: "50px", xl: "250px" },
+                  marginLeft: { xs: "-120px" },
                   textAlign: "left",
                   gap: "40px",
                   width: { xs: "600px", sm: "800px", xl: "500px" },
+                  "@media (min-width: 360px)": {
+                    marginLeft: "-150px", // Keep horizontal layout
+                    marginBottom: "100px",
+                  },
+                  "@media (min-width: 375px)": {
+                    marginLeft: "-150px", // Keep horizontal layout
+                    marginBottom: "100px",
+                  },
+                  "@media (min-width: 428px)": {
+                    marginLeft: "-150px", // Keep horizontal layout
+                    marginBottom: "100px",
+                  },
+                  "@media (min-width: 768px)": {
+                    marginLeft: "-280px", // Keep horizontal layout
+                    marginBottom: "120px",
+                  },
+                  "@media (min-width: 800px)": {
+                    marginLeft: "-310px", // Keep horizontal layout
+                    marginBottom: "120px",
+                  },
+                  "@media (min-width: 820px)": {
+                    marginLeft: "-330px", // Keep horizontal layout
+                    marginBottom: "120px",
+                  },
+                  "@media (min-width: 1114px)": {
+                    marginLeft: "-550px", // Keep horizontal layout
+                    marginBottom: "120px",
+                  },
+                  "@media (min-width: 1128px)": {
+                    marginLeft: "10px", // Keep horizontal layout
+                    marginBottom: "120px",
+                  },
                 }}
               >
                 <Typography
@@ -277,6 +325,7 @@ const Design = () => {
                     fontWeight: "600",
                     position: "relative",
                     display: "inline-block",
+                    fontSize: { xs: "20px", sm: "25px" },
                   }}
                 >
                   DESIGN
@@ -308,7 +357,10 @@ const Design = () => {
                   />
                 </Typography>
 
-                <Breadcrumbs aria-label="breadcrumb" sx={{ marginTop: "10px" }}>
+                <Breadcrumbs
+                  aria-label="breadcrumb"
+                  sx={{ marginTop: "10px", fontSize: { sm: "25px" } }}
+                >
                   <Link
                     to="/"
                     style={{
@@ -333,7 +385,12 @@ const Design = () => {
                   >
                     Services
                   </Link>
-                  <Typography color="text.primary">Design</Typography>
+                  <Typography
+                    color="text.primary"
+                    sx={{ fontSize: { sm: "25px" } }}
+                  >
+                    Design
+                  </Typography>
                 </Breadcrumbs>
               </Box>
 
@@ -347,7 +404,8 @@ const Design = () => {
                   sx={{
                     fontSize: {
                       xs: "20px",
-                      sm: "10px",
+                      sm: "30px",
+                      md: "20px",
                       lg: "40px",
                       xl: "60px",
                     },
@@ -356,6 +414,17 @@ const Design = () => {
                     left: "50%",
                     maxWidth: "30%",
                     fontWeight: "750",
+                    "@media (min-width: 1114px)": {
+                      marginLeft: "50px",
+                      fontSize: "30px",
+                      maxWidth: "25%",
+                    },
+                    "@media (min-width: 1280px)": {
+                      marginLeft: "0px",
+                      fontSize: "38px",
+                      fontWeight: "bold",
+                      maxWidth: "25%",
+                    },
                   }}
                 >
                   We create designs to augment User Experiences.
@@ -367,8 +436,8 @@ const Design = () => {
                   variant="h5"
                   sx={{
                     fontSize: {
-                      xs: "20px",
-                      sm: "10px",
+                      xs: "18px",
+                      sm: "30px",
                       lg: "40px",
                       xl: "42px",
                     },
@@ -377,8 +446,17 @@ const Design = () => {
                     position: "absolute",
                     fontWeight: "700",
                     left: "50%",
-                    maxWidth: "35%",
-                    marginTop: "20px",
+                    maxWidth: { xs: "45%", xl: "40%" },
+                    marginTop: { xs: "100px", xl: "30px" },
+                    "@media (min-width: 375px)": {
+                      marginTop: "0px",
+                    },
+                    "@media (min-width: 114px)": {
+                      marginLeft: "50px",
+                    },
+                    "@media (min-width: 114px)": {
+                      marginLeft: "0px",
+                    },
                   }}
                 >
                   <strong>
@@ -454,38 +532,48 @@ const Design = () => {
 
         {/* List Section */}
         <Box display="flex" flexWrap="wrap" justifyContent="space-between">
-          {items.map((item, index) => (
+          {services.map((item, index) => (
             <Box
               key={index}
               sx={{
-                display: "flex",
-                alignItems: "center",
-                width: "23%",
+                width: "23%", // Keeps the 3x4 layout
                 padding: "16px 0",
                 textAlign: "left",
                 marginBottom: "16px",
-                "&:hover .hover-line": {
-                  backgroundPosition: "40px 0",
-                  transition: "background-position 2s linear",
-                },
               }}
             >
-              <Box
-                ref={(el) => (linesRef.current[index] = el)}
-                className="hover-line"
-                sx={{
-                  width: "40px",
-                  height: "2px",
-                  marginRight: "8px",
-                  backgroundImage:
-                    "repeating-linear-gradient(40deg, black, black 2.5px, transparent 3.5px, transparent 6px)",
-                  backgroundSize: "40px 100%",
-                  backgroundPosition: "0 0",
-                }}
-              />
-              <Typography sx={{ fontSize: "23px", fontWeight: "bold" }}>
-                {item}
-              </Typography>
+              <Link
+                to={item.link} // Redirects on click
+                style={{ textDecoration: "none", color: "inherit" }} // Keeps design clean
+              >
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    "&:hover .hover-line": {
+                      backgroundPosition: "40px 0",
+                      transition: "background-position 2s linear",
+                    },
+                  }}
+                >
+                  <Box
+                    ref={(el) => (linesRef.current[index] = el)}
+                    className="hover-line"
+                    sx={{
+                      width: "40px",
+                      height: "2px",
+                      marginRight: "8px",
+                      backgroundImage:
+                        "repeating-linear-gradient(40deg, black, black 2.5px, transparent 3.5px, transparent 6px)",
+                      backgroundSize: "40px 100%",
+                      backgroundPosition: "0 0",
+                    }}
+                  />
+                  <Typography sx={{ fontSize: "23px", fontWeight: "bold" }}>
+                    {item.name}
+                  </Typography>
+                </Box>
+              </Link>
             </Box>
           ))}
         </Box>
