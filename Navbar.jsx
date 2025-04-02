@@ -99,6 +99,10 @@ const Navbar = () => {
             justifyContent: "space-between",
             alignItems: "center",
             marginTop: "5px",
+            "@media (min-width: 1114px)": {
+              padding: "0px 90px",
+              gap: "20px"
+            },
           }}
         >
           {/* Logo */}
@@ -106,7 +110,7 @@ const Navbar = () => {
             <img
               src={logo}
               alt="logo"
-              style={{ height: "35px", width: "180px" }}
+              style={{ height: "32px", width: "180px" }}
             />
           </Link>
 
@@ -154,70 +158,69 @@ const Navbar = () => {
 
           {/* Contact Button */}
           <Box sx={{ display: { xs: "none", md: "block" } }}>
-  <Link to="/contactus" style={{ textDecoration: "none" }}>
-    <motion.div
-      whileHover="hover"
-      initial="initial"
-      style={{
-        height: "35px",
-        width: "140px",
-        overflow: "hidden",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      <Button
-        variant="contained"
-        sx={{
-          backgroundColor: "#000",
-          color: "#fff",
-          fontWeight: "bold",
-          height: "100%",
-          width: "100%",
-          overflow: "hidden",
-          position: "relative",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <motion.div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            height: "100%",
-            overflow: "hidden",
-          }}
-        >
-          <motion.span
-            style={{ display: "block" }}
-            variants={{
-              initial: { y: "0%" },
-              hover: { y: "-100%" },
-            }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-          >
-            Contact
-          </motion.span>
-          <motion.span
-            style={{ display: "block", position: "absolute" }}
-            variants={{
-              initial: { y: "100%" },
-              hover: { y: "0%" },
-            }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-          >
-            Contact
-          </motion.span>
-        </motion.div>
-      </Button>
-    </motion.div>
-  </Link>
-</Box>
-
+            <Link to="/contactus" style={{ textDecoration: "none" }}>
+              <motion.div
+                whileHover="hover"
+                initial="initial"
+                style={{
+                  height: "35px",
+                  width: "140px",
+                  overflow: "hidden",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <Button
+                  variant="contained"
+                  sx={{
+                    backgroundColor: "#000",
+                    color: "#fff",
+                    fontWeight: "bold",
+                    height: "100%",
+                    width: "100%",
+                    overflow: "hidden",
+                    position: "relative",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <motion.div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      height: "100%",
+                      overflow: "hidden",
+                    }}
+                  >
+                    <motion.span
+                      style={{ display: "block" }}
+                      variants={{
+                        initial: { y: "0%" },
+                        hover: { y: "-100%" },
+                      }}
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                    >
+                      Contact
+                    </motion.span>
+                    <motion.span
+                      style={{ display: "block", position: "absolute" }}
+                      variants={{
+                        initial: { y: "100%" },
+                        hover: { y: "0%" },
+                      }}
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                    >
+                      Contact
+                    </motion.span>
+                  </motion.div>
+                </Button>
+              </motion.div>
+            </Link>
+          </Box>
 
           {/* Hamburger Menu */}
           <IconButton
